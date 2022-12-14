@@ -24,6 +24,7 @@ globals {
   cloudfront_ssl_policy       = "redirect-to-https"
   cloudfront_ssl_method       = "sni-only"
   cloudfront_ssl_default_cert = false
+  cloudfront_ssl_min_version   = "TLSv1.2_2021"
 }
 
 ##############################################################################
@@ -116,10 +117,6 @@ generate_hcl "_generated_cloudfront.tf" {
         max_ttl                = global.cloudfront_cache_max_ttl
       }
 
-      tags = {
-        Environment = "production"
-      }
-
       restrictions {
         geo_restriction {
           restriction_type = "none"
@@ -130,6 +127,7 @@ generate_hcl "_generated_cloudfront.tf" {
       viewer_certificate {
         cloudfront_default_certificate = global.cloudfront_ssl_default_cert
         ssl_support_method             = global.cloudfront_ssl_method
+        minimum_protocol_version       = global.cloudfront_ssl_min_version
         acm_certificate_arn            = data.aws_acm_certificate.this.arn
       }
     }

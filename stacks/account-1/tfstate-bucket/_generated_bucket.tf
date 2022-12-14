@@ -7,7 +7,14 @@ module "s3_bucket" {
   bucket                  = "test-task-account-1-tfstate"
   ignore_public_acls      = true
   restrict_public_buckets = true
-  source                  = "terraform-aws-modules/s3-bucket/aws"
+  server_side_encryption_configuration = {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+  source = "terraform-aws-modules/s3-bucket/aws"
   versioning = {
     enabled = true
   }

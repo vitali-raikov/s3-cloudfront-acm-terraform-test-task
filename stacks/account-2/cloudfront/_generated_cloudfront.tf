@@ -18,9 +18,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   price_class         = "PriceClass_100"
-  tags = {
-    Environment = "production"
-  }
   origin {
     domain_name              = "bolt.crabdance.com.s3.eu-north-1.amazonaws.com"
     origin_access_control_id = aws_cloudfront_origin_access_control.this.id
@@ -62,6 +59,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     acm_certificate_arn            = data.aws_acm_certificate.this.arn
     cloudfront_default_certificate = false
+    minimum_protocol_version       = "TLSv1.2_2021"
     ssl_support_method             = "sni-only"
   }
 }

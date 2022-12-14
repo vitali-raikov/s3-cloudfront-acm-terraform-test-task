@@ -16,6 +16,12 @@ generate_hcl "_generated_providers.tf" {
     provider "aws" {
       region  = global.terraform_provider_aws_config_region
       profile = global.terraform_provider_aws_config_profile
+
+      default_tags {
+        tags = {
+          Account = global.account_name
+        }
+      }
     }
   }
 }

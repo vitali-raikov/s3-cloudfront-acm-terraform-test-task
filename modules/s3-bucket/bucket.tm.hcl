@@ -17,6 +17,7 @@ globals {
   s3_block_public_policy     = true
   s3_restrict_public_buckets = true
   s3_ignore_public_acls      = true
+  s3_enable_encryption       = true
 
   # Whethever versioning is enabled or not
   s3_versioning = true
@@ -39,6 +40,14 @@ generate_hcl "_generated_bucket.tf" {
       block_public_policy     = global.s3_block_public_policy
       restrict_public_buckets = global.s3_restrict_public_buckets
       ignore_public_acls      = global.s3_ignore_public_acls
+
+      server_side_encryption_configuration = tm_ternary(global.s3_enable_encryption, {
+        rule = {
+          apply_server_side_encryption_by_default = {
+            sse_algorithm     = "AES256"
+          }
+        }
+      }, {})
 
       versioning = {
         enabled = global.s3_versioning

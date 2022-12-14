@@ -5,10 +5,6 @@ import {
 globals {
   # We override normal bucket name here
   s3_bucket_name = global.domain_name
-
-  # We benefit from versioning in tfstate buckets but don't really need
-  # it for statics
-  s3_versioning = false
 }
 
 ##############################################################################

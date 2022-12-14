@@ -42,6 +42,9 @@ jobs:
       - name: Check Terramate Formatting
         run: terramate fmt --check
 
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
+
   done:
     name: Static Analysis
     runs-on: ubuntu-20.04
