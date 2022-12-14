@@ -9,10 +9,10 @@ on:
       - main
 
 jobs:
-  tests:
+  terramate_formatting:
     runs-on: "ubuntu-20.04"
+    name: Terramate formatting
 
-    name: Run Tests
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,6 +30,19 @@ jobs:
       - name: Clean Up Terramate Install Artifacts
         run: rm -rf terramate
 
+      - name: Check Terramate Formatting
+        run: terramate fmt --check
+
+  terraform_formatting:
+    runs-on: "ubuntu-20.04"
+    name: Terraform formatting
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -39,8 +52,15 @@ jobs:
       - name: Check Terraform Formatting
         run: terraform fmt -recursive -check -no-color
 
-      - name: Check Terramate Formatting
-        run: terramate fmt --check
+  security:
+    runs-on: "ubuntu-20.04"
+
+    name: Terraform Security Scan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Run Terraform Security Check
         uses: aquasecurity/tfsec-action@v1.0.0
