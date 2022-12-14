@@ -44,12 +44,3 @@ jobs:
 
       - name: Run Terraform Security Check
         uses: aquasecurity/tfsec-action@v1.0.0
-
-  done:
-    name: Static Analysis
-    runs-on: ubuntu-20.04
-    needs: tests
-
-    steps:
-      - name: Done
-        run: "true"
