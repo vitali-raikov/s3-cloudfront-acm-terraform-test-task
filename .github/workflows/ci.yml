@@ -42,7 +42,7 @@ jobs:
       - name: Check Terramate Formatting
         run: terramate fmt --check
 
-      - name: tfsec
+      - name: Run Terraform Security Check
         uses: aquasecurity/tfsec-action@v1.0.0
 
   done:
