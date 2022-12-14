@@ -44,7 +44,7 @@ generate_hcl "_generated_bucket.tf" {
       server_side_encryption_configuration = tm_ternary(global.s3_enable_encryption, {
         rule = {
           apply_server_side_encryption_by_default = {
-            sse_algorithm     = "AES256"
+            sse_algorithm = "AES256"
           }
         }
       }, {})

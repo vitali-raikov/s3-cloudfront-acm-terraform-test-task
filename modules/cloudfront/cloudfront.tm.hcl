@@ -24,7 +24,7 @@ globals {
   cloudfront_ssl_policy       = "redirect-to-https"
   cloudfront_ssl_method       = "sni-only"
   cloudfront_ssl_default_cert = false
-  cloudfront_ssl_min_version   = "TLSv1.2_2021"
+  cloudfront_ssl_min_version  = "TLSv1.2_2021"
 }
 
 ##############################################################################
